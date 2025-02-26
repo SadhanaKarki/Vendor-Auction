@@ -1,16 +1,17 @@
 
 import 'package:flutter/material.dart';
+import 'package:fyp/mobile/Pages/user_registration/user_registration.dart';
+import 'package:fyp/mobile/Pages/home/ui/homepage.dart';
 
-import 'package:fyp/Pages/login/login.dart';
 
-class SignupPage extends StatefulWidget {
-  const SignupPage({super.key});
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  State<SignupPage> createState() => _LoginFormState();
+  State<LoginPage> createState() => _LoginFormState();
 }
 
-class _LoginFormState extends State<SignupPage> {
+class _LoginFormState extends State<LoginPage> {
   
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class _LoginFormState extends State<SignupPage> {
            Navigator.pop(context);
          },
         ),
-        title:  Center(child: Text('Sign Up ',style: TextStyle(fontSize: 17, color: Color.fromARGB(255, 83, 82, 82)),)), 
+        title:  Center(child: Text('Sign In ',style: TextStyle(fontSize: 17, color: Color.fromARGB(255, 83, 82, 82)),)), 
       ),
       body: Center(
         child: Container(
@@ -33,7 +34,7 @@ class _LoginFormState extends State<SignupPage> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(15)
           ),
-          child: Signup(),
+          child: Login(),
 
         )),
 
@@ -43,22 +44,32 @@ class _LoginFormState extends State<SignupPage> {
  
 }
 
-class Signup extends StatefulWidget {
-  const Signup({super.key});
+class Login extends StatefulWidget {
+  const Login({super.key});
 
   @override
-  State<Signup> createState() => _LoginState();
+  State<Login> createState() => _LoginState();
 }
 
-class _LoginState extends State<Signup> {
+class _LoginState extends State<Login> {
   final _formkey =GlobalKey<FormState>();
-   
+    TextEditingController username= TextEditingController();
    TextEditingController password= TextEditingController();
-   TextEditingController username= TextEditingController();
-    TextEditingController confirmpassword= TextEditingController();
+
+   bool _isPasswordVisible = false; 
    
-   bool _isPasswordVisible = false;
-   bool _isConfirmPasswordVisible = false;
+   //Regular expn for email validation
+     String? validateEmail(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter an email';
+    }
+    String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    RegExp regex = RegExp(pattern);
+    if (!regex.hasMatch(value)) {
+      return 'Enter a valid email address';
+    }
+    return null;
+  }
 
   @override
 
@@ -77,28 +88,30 @@ class _LoginState extends State<Signup> {
            ListView(
               padding:const  EdgeInsets.only(top: 15,bottom: 20,left: 40,right: 40),
               children: [
-
+                Center(child: Text('Welcome', style: TextStyle(fontSize: 25,fontWeight: FontWeight.bold,color: const Color.fromARGB(255, 0, 0, 0)),)),
+                const SizedBox(height: 10,),
+                Center(child: Text("Sign in with your username and password",style: TextStyle(fontSize: 15, color: Color.fromARGB(255, 83, 82, 82)),),),
                 const SizedBox(height: 20,),
-                Expanded(child: TextFormField(
-                  controller: username,
-                  decoration:  InputDecoration(
-                    labelText: 'Username',
-                    hintText: 'enter your username',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15)
-                    )  
-                  ),
-                  keyboardType: TextInputType.text,
-                  validator:(value) {
-                    if(value!.isEmpty){
-                      return"Please enter your username";
+                Expanded(
+                  child: TextFormField(
+                    controller: username,
+                    decoration:  InputDecoration(
+                      labelText: 'Username',
+                      hintText: 'enter your username',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      )  
+                    ),
+                    keyboardType: TextInputType.text,
+                    validator:(value) {
+                      if(value!.isEmpty){
+                        return"Please enter your username";
+                      }
+                      return null;
                     }
-                    return null;
-                  },
                   ),
                 ),
                 const SizedBox(height: 20,),
-                
                 Expanded(
                   child: TextFormField(
                     controller: password,
@@ -121,8 +134,7 @@ class _LoginState extends State<Signup> {
                     });
                   },
                 ),
-              
-                    ),
+              ),
                     validator:(value) {
                       if(value!.isEmpty){
                         return"Please enter your password";
@@ -135,46 +147,17 @@ class _LoginState extends State<Signup> {
                   ),
                 ),
                 const SizedBox(height: 16,),
-                Expanded(child: TextFormField(
-                  controller: confirmpassword,
-                  obscureText: !_isConfirmPasswordVisible,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15)
-                    ),
-                    labelText: 'Confirm Password',
-                    hintText: 'Re-enter your password',
-                    suffixIcon: IconButton(
-                  icon: Icon(
-                    _isConfirmPasswordVisible
-                        ? Icons.visibility
-                        : Icons.visibility_off,
+                TextButton(
+                  onPressed: (){}, 
+                  child: Text("Forgot Password?",style: TextStyle(),)
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _isConfirmPasswordVisible = !_isConfirmPasswordVisible; 
-                    });
-                  },
-                ),
-              ),
-                  validator:(value) {
-                    if(value!.isEmpty){
-                      return"Please enter your password";
-                    }
-                    else if(value.length<8){
-                      return"Your password must be 8 characters or more";
-                    }
-                    return null;
-                  },
-                )),
-               
                 const SizedBox(height: 20,),
                 ElevatedButton(
                   onPressed: (){
                     if (_formkey.currentState!.validate()) {
                       Navigator.push(
                      context,
-                     MaterialPageRoute(builder: (context) => LoginPage ()),
+                     MaterialPageRoute(builder: (context) => Homepage()),
                      );
                     }
                      
@@ -189,11 +172,26 @@ class _LoginState extends State<Signup> {
                    child: Container(
                     height: 40,
                     width: 80,
-                    child: const Center(child: Text('Sign up' , style: TextStyle(color: Colors.white),))),
+                    child: const Center(child: Text('Log in' , style: TextStyle(color: Colors.white),))),
                   ),
-            
+                const SizedBox(height: 25,), 
                 
-               
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Don't have an account?",style: TextStyle(
+                      fontSize: 15,color: Colors.black
+                    ),),
+                    TextButton(
+                      onPressed: (){
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => UserRegistration()),);
+                      }, 
+                      child: Text("Sign Up",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold,color: Colors.blue),)
+                     )
+                  ],
+                ),
                 
             
               ],

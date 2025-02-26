@@ -1,5 +1,5 @@
 //import 'package:flutter/material.dart';
-import 'package:fyp/Pages/home/model/card_model.dart';
+import 'package:fyp/mobile/Pages/home/model/card_model.dart';
 
 List<Homecard> cardList=[
  Homecard(count: 0, name: "Submitted Bids", iconpath: "assets/bid.png"),

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:fyp/Pages/signup/signup.dart';
+import 'package:fyp/mobile/Pages/signup/signup.dart';
 
 class UserRegistration extends StatefulWidget {
   const UserRegistration({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/Pages/home/ui/expiredbid_tab.dart';
-import 'package:fyp/Pages/home/ui/hometab.dart';
+import 'package:fyp/mobile/Pages/home/ui/expiredbid_tab.dart';
+import 'package:fyp/mobile/Pages/home/ui/hometab.dart';
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});

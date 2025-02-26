@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/Pages/In-progressBids/in_progress_bids.dart';
-import 'package:fyp/Pages/TendeOpened/tender_opened.dart';
+import 'package:fyp/mobile/Pages/In-progressBids/in_progress_bids.dart';
+import 'package:fyp/mobile/Pages/publishedBids/publishedBids.dart';
 //import 'package:fyp/Pages/home/ui/homepage.dart';
-import 'package:fyp/Pages/submittedBids/submitted_bids.dart';
-import 'package:fyp/data/cardlist.dart';
+import 'package:fyp/mobile/Pages/submittedBids/submitted_bids.dart';
+import 'package:fyp/mobile/data/cardlist.dart';
 
 class Hometab extends StatelessWidget {
   const Hometab({super.key});

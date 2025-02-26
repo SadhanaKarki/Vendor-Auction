@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fyp/Pages/TendeOpened/bid_now_page.dart';
+import 'package:fyp/mobile/Pages/publishedBids/bid_now_page.dart';
 
 class TenderAll extends StatefulWidget {
   const TenderAll({super.key});
